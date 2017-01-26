@@ -1,0 +1,77 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx} % Packages to works with images
+\usepackage{color} %Allows you to change the color of the font.
+\usepackage{multicol} % Used to create multiple columns on a page (or part of a page)
+\usepackage{enumerate} % Allows you to change the numbering
+\usepackage{hyperref} % Allows you to add hyperlinks to your document.
+\usepackage{subcaption}
+
+\usepackage{fontawesome}
+\usepackage[T1]{fontenc}
+\usepackage[dvipsnames]{xcolor}
+\pagenumbering{gobble} %suppresses page numbering
+
+\usepackage{paralist}
+\usepackage{tabto}
+\usepackage{ulem}
+\usepackage{pdfpages}
+\usepackage{geometry} %allows you to edit the margins
+\geometry{letterpaper, portrait, margin=1in}
+
+\usepackage{titlesec} % Allows creating custom \section's\usepackage{url}
+\usepackage{lipsum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+\titleformat{\section}[block]
+{\centering}
+{\bf Article \thesection \\}
+{0pt}
+{\bf \MakeUppercase}
+
+\newcounter{sectioncounter}
+\newenvironment{article}[1]
+{
+	\section{#1}
+	\begin{list}{\bf Section \arabic{sectioncounter}:\quad}
+	{
+		\usecounter{sectioncounter}
+		\setlength{\leftmargin}{1in+\labelsep}
+		\setlength{\itemindent}{0cm}
+		\setlength{\labelwidth}{3in}
+	}
+}
+{
+	\end{list}
+} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	
+	\centerline{\bf \Large Constitution and By-Laws}
+	\vspace{.5pc}
+	\centerline{\bf \Large The Order of Saint George}
+	
+	\input{article_1}
+	\input{article_2}
+	\input{article_3}
+	\input{article_4}
+	\input{article_5}
+	\input{article_6}
+	\input{article_7}
+	\input{article_8}
+	
+	\newpage
+	\centerline{\bf \Large BY-LAWS}
+	
+	\input{By-Laws/article_1}
+	\input{By-Laws/article_2}
+	\input{By-Laws/article_3}
+	\input{By-Laws/article_4}
+
+\end{document}
