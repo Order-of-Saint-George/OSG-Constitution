@@ -1,11 +1,10 @@
 \documentclass[12pt]{article}
 
-\usepackage{graphicx} % Packages to works with images
+\usepackage[pdftex]{graphicx} % Packages to works with images
 \usepackage{color} %Allows you to change the color of the font.
 \usepackage{multicol} % Used to create multiple columns on a page (or part of a page)
 \usepackage{enumerate} % Allows you to change the numbering
 \usepackage{hyperref} % Allows you to add hyperlinks to your document.
-\usepackage{subcaption}
 
 \usepackage{fontawesome}
 \usepackage[T1]{fontenc}
@@ -17,13 +16,15 @@
 \usepackage{ulem}
 \usepackage{pdfpages}
 \usepackage{geometry} %allows you to edit the margins
-\geometry{letterpaper, portrait, margin=1in}
+\usepackage[export]{adjustbox}
+\usepackage[autostyle]{csquotes}
 
 \usepackage{titlesec} % Allows creating custom \section's\usepackage{url}
-%\usepackage{lipsum}
-%\usepackage[none]{hyphenat}
+\usepackage{lipsum}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\graphicspath{{images/}}
 
 \renewcommand{\thesection}{\Roman{section}}
 \renewcommand{\thesubsection}{\arabic{subsection}}
@@ -39,24 +40,32 @@
 {
 	\section{#1}
 	\begin{list}{\bf Section \arabic{sectioncounter}:\quad}
-	{
-		\usecounter{sectioncounter}
-		\setlength{\leftmargin}{1in+\labelsep}
-		\setlength{\itemindent}{0cm}
-		\setlength{\labelwidth}{3in}
+		{
+			\usecounter{sectioncounter}
+			\setlength{\leftmargin}{1in+\labelsep}
+			\setlength{\itemindent}{0cm}
+			\setlength{\labelwidth}{3in}
+		}
 	}
-}
-{
+	{
 	\end{list}
-} 
+}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 	
-	\centerline{\bf \Large Constitution and By-Laws}
-	\vspace{.5pc}
-	\centerline{\bf \Large The Order of Saint George}
+	\centerline{\begin{minipage}{0.2\textwidth}
+			\includegraphics[height=3.5cm, left]{crest}
+		\end{minipage}
+		\begin{minipage}{0.5\textwidth}
+			\bf \Large Constitution and By-Laws\\The Order of Saint George\\
+	\end{minipage}}
 	
 	\input{article_1}
 	\input{article_2}
@@ -74,5 +83,5 @@
 	\input{By-Laws/article_2}
 	\input{By-Laws/article_3}
 	\input{By-Laws/article_4}
-
+	
 \end{document}
