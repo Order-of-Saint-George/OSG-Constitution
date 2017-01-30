@@ -4,7 +4,7 @@
 \usepackage{color} %Allows you to change the color of the font.
 \usepackage{multicol} % Used to create multiple columns on a page (or part of a page)
 \usepackage{enumerate} % Allows you to change the numbering
-\usepackage{hyperref} % Allows you to add hyperlinks to your document.
+\usepackage[bookmarks=false,bookmarksopen=true]{hyperref} % Allows you to add hyperlinks to your document.
 
 \usepackage{fontawesome}
 \usepackage[T1]{fontenc}
@@ -18,6 +18,7 @@
 \usepackage{geometry} %allows you to edit the margins
 \usepackage[export]{adjustbox}
 \usepackage[autostyle]{csquotes}
+\usepackage{bookmark}
 
 \usepackage{titlesec} % Allows creating custom \section's\usepackage{url}
 \usepackage{lipsum}
@@ -26,12 +27,17 @@
 
 \graphicspath{{images/}}
 
+\makeatletter
+\renewcommand{\toclevel@section}{100}
 \renewcommand{\thesection}{\Roman{section}}
 \renewcommand{\thesubsection}{\arabic{subsection}}
 
 \titleformat{\section}[block]
 {\centering}
-{\bf Article \thesection \\}
+{\label{Article \thesection}
+	\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{Article \thesection}{}}
+	\bookmark[dest=Article \thesection,level=2]{Article \thesection : \nameref{Article \thesection}}
+	\bf Article \thesection \\}
 {0pt}
 {\bf \MakeUppercase}
 
@@ -39,7 +45,9 @@
 \newenvironment{article}[1]
 {
 	\section{#1}
-	\begin{list}{\bf Section \arabic{sectioncounter}:\quad}
+	\begin{list}{\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{Article #1 Section \arabic{sectioncounter}}{}}
+			\bookmark[dest=Article #1 Section \arabic{sectioncounter},level=3]{Section \arabic{sectioncounter}}
+		\bf Section \arabic{sectioncounter}:\quad}
 		{
 			\usecounter{sectioncounter}
 			\setlength{\leftmargin}{1in+\labelsep}
@@ -60,6 +68,8 @@
 
 \begin{document}
 	
+	\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{Constitution}{}}
+	\bookmark[dest=Constitution,level=1]{Constitution}
 	\centerline{\begin{minipage}{0.2\textwidth}
 			\includegraphics[height=3.5cm, left]{crest}
 		\end{minipage}
@@ -78,6 +88,8 @@
 	\input{article_8}
 	
 	\newpage
+	\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{By-Laws}{}}
+	\bookmark[dest=By-Laws,level=1]{By-Laws}
 	\centerline{\bf \Large BY-LAWS}
 	
 	\input{By-Laws/article_1}
