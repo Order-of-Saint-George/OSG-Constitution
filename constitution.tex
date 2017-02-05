@@ -4,7 +4,7 @@
 \usepackage{color} %Allows you to change the color of the font.
 \usepackage{multicol} % Used to create multiple columns on a page (or part of a page)
 \usepackage{enumerate} % Allows you to change the numbering
-\usepackage{hyperref} % Allows you to add hyperlinks to your document.
+\usepackage[hidelinks]{hyperref} % Allows you to add hyperlinks to your document.
 
 \usepackage{fontawesome}
 \usepackage[T1]{fontenc}
@@ -44,7 +44,7 @@
 	\stepcounter{articlecounter}
 	\label{Article \arabic{articlecounter}}
 	\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{Article \arabic{articlecounter}}{}}
-	\bookmark[dest=Article \arabic{articlecounter}, level=2]{Article \thesection : \nameref{Article \arabic{articlecounter}}}
+	\bookmark[dest=Article \arabic{articlecounter}, level=2]{Article \thesection : \nameref*{Article \arabic{articlecounter}}}
 	\hspace*{-1em}\bf Article \thesection \\
 }
 {0pt}
