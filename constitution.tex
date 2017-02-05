@@ -4,21 +4,22 @@
 \usepackage{color} %Allows you to change the color of the font.
 \usepackage{multicol} % Used to create multiple columns on a page (or part of a page)
 \usepackage{enumerate} % Allows you to change the numbering
-\usepackage[bookmarks=false,bookmarksopen=true]{hyperref} % Allows you to add hyperlinks to your document.
+\usepackage{hyperref} % Allows you to add hyperlinks to your document.
 
 \usepackage{fontawesome}
 \usepackage[T1]{fontenc}
 \usepackage[dvipsnames]{xcolor}
-\pagenumbering{gobble} %suppresses page numbering
+%\pagenumbering{gobble} %suppresses page numbering
 
 \usepackage{paralist}
 \usepackage{tabto}
 \usepackage{ulem}
 \usepackage{pdfpages}
-\usepackage{geometry} %allows you to edit the margins
+\usepackage[margin=1in]{geometry} %allows you to edit the margins
 \usepackage[export]{adjustbox}
 \usepackage[autostyle]{csquotes}
 \usepackage{bookmark}
+\usepackage{pageslts}
 
 \usepackage{titlesec} % Allows creating custom \section's\usepackage{url}
 \usepackage{lipsum}
@@ -26,27 +27,39 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \graphicspath{{images/}}
+\hypersetup{bookmarksopen=true}
 
 \makeatletter
 \renewcommand{\toclevel@section}{100}
 \renewcommand{\thesection}{\Roman{section}}
 \renewcommand{\thesubsection}{\arabic{subsection}}
 
+\newcounter{articlecounter}
+\newcounter{sectioncounter}
+\newcounter{globalsectioncounter}
+
 \titleformat{\section}[block]
 {\centering}
-{\label{Article \thesection}
-	\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{Article \thesection}{}}
-	\bookmark[dest=Article \thesection,level=2]{Article \thesection : \nameref{Article \thesection}}
-	\bf Article \thesection \\}
+{%
+	\stepcounter{articlecounter}
+	\label{Article \arabic{articlecounter}}
+	\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{Article \arabic{articlecounter}}{}}
+	\bookmark[dest=Article \arabic{articlecounter}, level=2]{Article \thesection : \nameref{Article \arabic{articlecounter}}}
+	\hspace*{-1em}\bf Article \thesection \\
+}
 {0pt}
 {\bf \MakeUppercase}
 
-\newcounter{sectioncounter}
 \newenvironment{article}[1]
 {
 	\section{#1}
-	\begin{list}{\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{Article #1 Section \arabic{sectioncounter}}{}}
-			\bookmark[dest=Article #1 Section \arabic{sectioncounter},level=3]{Section \arabic{sectioncounter}}
+	\begin{list}{%
+		\stepcounter{globalsectioncounter}
+		\raisebox{\baselineskip}[0pt][0pt]{%
+			\hypertarget{Section \arabic{globalsectioncounter}}
+			{}
+		}
+		\bookmark[dest=Section \arabic{globalsectioncounter}, level=3]{Section \arabic{sectioncounter}}
 		\bf Section \arabic{sectioncounter}:\quad}
 		{
 			\usecounter{sectioncounter}
@@ -67,16 +80,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+	\pagenumbering{arabic}
+	\pagestyle{empty}
 	
-	\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{Constitution}{}}
-	\bookmark[dest=Constitution,level=1]{Constitution}
-	\centerline{\begin{minipage}{0.2\textwidth}
+	\bookmark[page=1, level=1]{Constitution}
+	\centerline{%
+		\begin{minipage}{0.2\textwidth}
 			\includegraphics[height=3.5cm, left]{crest}
 		\end{minipage}
 		\begin{minipage}{0.5\textwidth}
 			\bf \Large Constitution and By-Laws\\The Order of Saint George
-			\flushright\normalfont\footnotesize Revised: xx/xx/xxxx
-	\end{minipage}}
+			\flushright\normalfont\footnotesize Revised: xx/xx/xxxx \enspace\enspace
+		\end{minipage}
+	}
 	
 	\input{article_1}
 	\input{article_2}
@@ -88,9 +104,10 @@
 	\input{article_8}
 	
 	\newpage
-	\raisebox{\baselineskip}[0pt][0pt]{\hypertarget{By-Laws}{}}
-	\bookmark[dest=By-Laws,level=1]{By-Laws}
+	\bookmark[page=\theCurrentPage, level=1]{By-Laws}
 	\centerline{\bf \Large BY-LAWS}
+	
+	\setcounter{section}{0}
 	
 	\input{By-Laws/article_1}
 	\input{By-Laws/article_2}
