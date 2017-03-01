@@ -21,6 +21,7 @@
 \usepackage{bookmark}
 \usepackage{pageslts}
 \usepackage{changepage}
+\usepackage{pgffor}
 
 \usepackage{titlesec} % Allows creating custom \section's\usepackage{url}
 \usepackage{lipsum}
@@ -34,6 +35,9 @@
 \renewcommand{\toclevel@section}{100}
 \renewcommand{\thesection}{\Roman{section}}
 \renewcommand{\thesubsection}{\arabic{subsection}}
+
+\newcommand*{\MaxNumOfConstitutionArticles}{10}
+\newcommand*{\MaxNumOfByLawArticles}{04}
 
 \newcounter{articlecounter}
 \newcounter{sectioncounter}
@@ -94,17 +98,14 @@
 			\flushright\normalfont\footnotesize Revised: xx/xx/xxxx \enspace\enspace
 		\end{minipage}
 	}
-	
-	\input{article_01}
-	\input{article_02}
-	\input{article_03}
-	\input{article_04}
-	\input{article_05}
-	\input{article_06}
-	\input{article_07}
-	\input{article_08}
-	\input{article_09}
-	\input{article_10}
+
+	\foreach \a in {00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, ...,\MaxNumOfConstitutionArticles}{
+		\IfFileExists{Article_\a} {
+			\input{Article_\a}
+		}{
+			% files does not exist, so nothing to do
+		}
+	}
 	
 	\newpage
 	\bookmark[page=\theCurrentPage, level=1]{By-Laws}
@@ -112,9 +113,12 @@
 	
 	\setcounter{section}{0}
 	
-	\input{By-Laws/article_01}
-	\input{By-Laws/article_02}
-	\input{By-Laws/article_03}
-	\input{By-Laws/article_04}
+	\foreach \a in {00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, ...,\MaxNumOfByLawArticles}{
+		\IfFileExists{By-Laws/Article_\a} {
+			\input{By-Laws/Article_\a}
+		}{
+			% files does not exist, so nothing to do
+		}
+	}
 	
 \end{document}
