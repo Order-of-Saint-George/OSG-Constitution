@@ -21,7 +21,6 @@
 \usepackage{bookmark}
 \usepackage{pageslts}
 \usepackage{changepage}
-\usepackage{pgffor}
 
 \usepackage{titlesec} % Allows creating custom \section's\usepackage{url}
 \usepackage{lipsum}
@@ -36,12 +35,15 @@
 \renewcommand{\thesection}{\Roman{section}}
 \renewcommand{\thesubsection}{\arabic{subsection}}
 
-\newcommand*{\MaxNumOfConstitutionArticles}{10}
-\newcommand*{\MaxNumOfByLawArticles}{04}
+\newcommand{\refConstitution}[1]{Article \expandafter\@slowromancap\romannumeral #1@ \enquote{\nameref*{Article #1}}}
+\newcommand{\refByLaws}[1]{Article \expandafter\@slowromancap\romannumeral #1@ \enquote{\nameref*{Article \the\numexpr\value{constitutionarticlecounter}+#1\relax}} of the By-Laws}
 
 \newcounter{articlecounter}
 \newcounter{sectioncounter}
 \newcounter{globalsectioncounter}
+\newcounter{constitutionarticlecounter}
+\newcounter{count}
+\newboolean{stop}
 
 \titleformat{\section}[block]
 {\centering}
@@ -82,6 +84,15 @@
 \hyphenpenalty=10000
 \hbadness=10000
 
+\setboolean{stop}{false}
+\whiledo{\NOT\boolean{stop}}{
+	\stepcounter{constitutionarticlecounter}
+	\IfFileExists{article_\two@digits{\value{constitutionarticlecounter}}}{}{
+		\addtocounter{constitutionarticlecounter}{-1}
+		\setboolean{stop}{true}
+	}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -99,11 +110,15 @@
 		\end{minipage}
 	}
 
-	\foreach \a in {00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, ...,\MaxNumOfConstitutionArticles}{
-		\IfFileExists{Article_\a} {
-			\input{Article_\a}
+	\setboolean{stop}{false}
+	\setcounter{count}{0}
+	\whiledo{\NOT\boolean{stop}}{
+		\stepcounter{count}
+		\IfFileExists{article_\two@digits{\value{count}}}{
+			\input{article_\two@digits{\value{count}}}
 		}{
-			% files does not exist, so nothing to do
+			\addtocounter{count}{-1}
+			\setboolean{stop}{true}
 		}
 	}
 	
@@ -113,12 +128,15 @@
 	
 	\setcounter{section}{0}
 	
-	\foreach \a in {00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, ...,\MaxNumOfByLawArticles}{
-		\IfFileExists{By-Laws/Article_\a} {
-			\input{By-Laws/Article_\a}
+	\setboolean{stop}{false}
+	\setcounter{count}{0}
+	\whiledo{\NOT\boolean{stop}}{
+		\stepcounter{count}
+		\IfFileExists{By-Laws/article_\two@digits{\value{count}}}{
+			\input{By-Laws/article_\two@digits{\value{count}}}
 		}{
-			% files does not exist, so nothing to do
+			\addtocounter{count}{-1}
+			\setboolean{stop}{true}
 		}
-	}
-	
+	}	
 \end{document}
