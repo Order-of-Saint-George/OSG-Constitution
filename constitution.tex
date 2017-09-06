@@ -99,53 +99,53 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-	\pagenumbering{arabic}
-	\pagestyle{empty}
-	
-	\bookmark[page=1, level=1]{Constitution}
-	\centerline{%
-		\begin{minipage}{0.2\textwidth}
-			\includegraphics[height=3.5cm, left]{crest}
-		\end{minipage}
-		\begin{minipage}{0.5\textwidth}
-			\bf \Large Constitution and By-Laws\\The Order of Saint George
-			\flushright\normalfont\footnotesize Revised the \nth{27} of April, 2017 \enspace\enspace
-		\end{minipage}
-	}
+\pagenumbering{arabic}
+\pagestyle{empty}
 
-	\setboolean{stop}{false}
-	\setcounter{count}{0}
-	\whiledo{\NOT\boolean{stop}}{
-		\stepcounter{count}
-		\IfFileExists{article_\two@digits{\value{count}}}{
-			\input{article_\two@digits{\value{count}}}
-		}{
-			\addtocounter{count}{-1}
-			\setboolean{stop}{true}
-		}
+\bookmark[page=1, level=1]{Constitution}
+\centerline{%
+	\begin{minipage}{0.2\textwidth}
+		\includegraphics[height=3.5cm, left]{crest}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+		\bf \Large Constitution and By-Laws\\The Order of Saint George
+		\flushright\normalfont\footnotesize Revised the \nth{27} of April, 2017 \enspace\enspace
+	\end{minipage}
+}
+
+\setboolean{stop}{false}
+\setcounter{count}{0}
+\whiledo{\NOT\boolean{stop}}{
+	\stepcounter{count}
+	\IfFileExists{article_\two@digits{\value{count}}}{
+		\input{article_\two@digits{\value{count}}}
+	}{
+		\addtocounter{count}{-1}
+		\setboolean{stop}{true}
 	}
-	
-	\newpage
-	\bookmark[page=\theCurrentPage, level=1]{By-Laws}
-	\centerline{\bf \Large BY-LAWS}
-	
-	\setcounter{section}{0}
-	
-	\setboolean{stop}{false}
-	\setcounter{count}{0}
-	\whiledo{\NOT\boolean{stop}}{
-		\stepcounter{count}
-		\IfFileExists{By-Laws/article_\two@digits{\value{count}}}{
-			\input{By-Laws/article_\two@digits{\value{count}}}
-		}{
-			\addtocounter{count}{-1}
-			\setboolean{stop}{true}
-		}
+}
+
+\newpage
+\bookmark[page=\theCurrentPage, level=1]{By-Laws}
+\centerline{\bf \Large BY-LAWS}
+
+\setcounter{section}{0}
+
+\setboolean{stop}{false}
+\setcounter{count}{0}
+\whiledo{\NOT\boolean{stop}}{
+	\stepcounter{count}
+	\IfFileExists{By-Laws/article_\two@digits{\value{count}}}{
+		\input{By-Laws/article_\two@digits{\value{count}}}
+	}{
+		\addtocounter{count}{-1}
+		\setboolean{stop}{true}
 	}
-	
-	\vspace{.2in}
-	\par\noindent\makebox[2.5in]{\includegraphics[height=2.5cm]{dellinger}} \hfill\makebox[2.0in]{4/27/2017}
-	\vspace{-.15in}
-	\par\noindent\makebox[2.5in]{\hrulefill} \hfill\makebox[2.0in]{\hrulefill}
-	\par\noindent\makebox[2.5in][l]{Signature of Advisor}      \hfill\makebox[2.0in][l]{Date}
+}
+
+\vspace{.2in}
+\par\noindent\makebox[2.5in]{\includegraphics[height=2.5cm]{dellinger}} \hfill\makebox[2.0in]{4/27/2017}
+\vspace{-.15in}
+\par\noindent\makebox[2.5in]{\hrulefill} \hfill\makebox[2.0in]{\hrulefill}
+\par\noindent\makebox[2.5in][l]{Signature of Advisor}      \hfill\makebox[2.0in][l]{Date}
 \end{document}
