@@ -23,6 +23,7 @@
 \usepackage{changepage}
 \usepackage{microtype}
 \usepackage[super]{nth}
+\usepackage{datetime}
 
 \usepackage{titlesec} % Allows creating custom \section's\usepackage{url}
 \usepackage{lipsum}
@@ -38,6 +39,7 @@
 \renewcommand{\thesubsection}{\arabic{subsection}}
 
 \newcommand*{\crimson}{\textit{The Crimson}}
+\newcommand{\revisionDate}[3]{Revised the \nth{#1} of \monthname[#2], #3}
 \newcommand{\refConstitution}[1]{Article \expandafter\@slowromancap\romannumeral #1@ \enquote{\nameref*{Article #1}}}
 \newcommand{\refByLaws}[1]{Article \expandafter\@slowromancap\romannumeral #1@ \enquote{\nameref*{Article \the\numexpr\value{constitutionarticlecounter}+#1\relax}} of the By-Laws}
 
@@ -109,7 +111,7 @@
 	\end{minipage}
 	\begin{minipage}{0.5\textwidth}
 		\bf \Large Constitution and By-Laws\\The Order of Saint George
-		\flushright\normalfont\footnotesize Revised the \nth{27} of April, 2017 \enspace\enspace
+		\flushright\normalfont\footnotesize \revisionDate{30}{11}{2017} \enspace\enspace
 	\end{minipage}
 }
 
@@ -144,7 +146,7 @@
 }
 
 \vspace{.2in}
-\par\noindent\makebox[2.5in]{\includegraphics[height=2.5cm]{dellinger}} \hfill\makebox[2.0in]{4/27/2017}
+\par\noindent\makebox[2.5in]{\includegraphics[height=1in]{dellinger}} \hfill\makebox[2.0in]{4/27/2017}
 \vspace{-.15in}
 \par\noindent\makebox[2.5in]{\hrulefill} \hfill\makebox[2.0in]{\hrulefill}
 \par\noindent\makebox[2.5in][l]{Signature of Advisor}      \hfill\makebox[2.0in][l]{Date}
